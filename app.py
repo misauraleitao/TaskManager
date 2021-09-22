@@ -98,9 +98,11 @@ def logout():
     session.pop("user")
     return redirect(url_for("login"))
 
+
 @app.route("/add_task")
 def add_task():
-    return render_template("add_task.html")
+    catagories = mongo.db.catagories.find().sort("category_name", 1)
+    return render_template("add_task.html", catagories=catagories)
 
 
 if __name__ == "__main__":
